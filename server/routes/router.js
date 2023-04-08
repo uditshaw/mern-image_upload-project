@@ -5,10 +5,6 @@ const multer = require("multer");
 const users = require("../model/userSchema");
 const moment = require("moment");
 
-// router.get("/", (req, res) => {
-//   res.send("Server router Started");
-// });
-
 // Image storage path
 const imgconfig = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -54,6 +50,17 @@ router.post("/register", upload.single("photo"), async (req, res) => {
     res.status(201).json({ status: 201, finalData });
   } catch (error) {
     res.status(401).json({ status: 401, message: "Inside Try-catch error" });
+  }
+});
+
+// User data get on Homepage
+router.get("/getData", async (req, res) => {
+  try {
+    const getUser = await users.find();
+
+    res.status(201).json({ status: 201, getUser });
+  } catch (error) {
+    res.status(401).json({ status: 401, error: error.message });
   }
 });
 

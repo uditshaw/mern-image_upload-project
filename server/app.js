@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use(router);
 
-// app.use("./uploads", express.static("./uploads"));
+app.use("/uploads", express.static("./uploads"));
 
 app.listen(port, () => {
   db.connect();
